@@ -11,14 +11,19 @@ const Projects = () => {
       image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
       demo: "https://yumlo.ma/fr"
     },
-   
     {
       title: "Weather App",
       description: "Real-time weather dashboard that provides accurate forecasts, humidity levels, and wind speeds for cities worldwide.",
       tags: ["React", "OpenWeather API", "CSS3"],
       image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-  
       demo: "https://ikramed.github.io/WeatherApp/"
+    },
+    {
+      title: "Student Test Platform",
+      description: "An online platform for students to take practice tests and track their progress in English lessons.",
+      tags: ["React", "Vercel", "CSS3"],
+      image: "/images/test.png", // هنا الصورة ديالك
+      demo: "https://englishcastle-studentest.vercel.app/"
     }
   ];
 
@@ -41,20 +46,21 @@ const Projects = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-sky-500/50 transition-all duration-300 group"
-            >
-              <div className="relative overflow-hidden h-48">
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                />
+           <motion.div
+  key={index}
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.5, delay: index * 0.1 }}
+  className="bg-slate-900 rounded-xl overflow-hidden border border-slate-700 hover:border-sky-500/50 transition-all duration-300 group flex flex-col justify-between"
+>
+              {/* Image Card */}
+              <div className="relative overflow-hidden h-64 bg-black/5 flex items-center justify-center">
+              <img 
+  src={project.image} 
+  alt={project.title} 
+  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+/>
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
                   <a href={project.github} className="p-2 bg-slate-800 rounded-full text-white hover:bg-sky-500 transition-colors">
                     <Github size={20} />
@@ -64,12 +70,13 @@ const Projects = () => {
                   </a>
                 </div>
               </div>
-              
+
+              {/* Project Info */}
               <div className="p-6">
                 <h3 className="text-xl font-bold text-white mb-2 group-hover:text-sky-400 transition-colors">{project.title}</h3>
-                <p className="text-slate-400 text-sm mb-4 line-clamp-3">
-                  {project.description}
-                </p>
+               <p className="text-slate-400 text-sm mb-4 line-clamp-3 min-h-[3.5rem]">
+  {project.description}
+</p>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {project.tags.map((tag) => (
                     <span key={tag} className="text-xs px-2 py-1 bg-slate-800 text-sky-400 rounded border border-slate-700">
@@ -81,7 +88,6 @@ const Projects = () => {
                   <a href={project.demo} className="text-sm font-medium text-white hover:text-sky-400 flex items-center gap-1 transition-colors">
                     Live Demo <ExternalLink size={14} />
                   </a>
-                 
                 </div>
               </div>
             </motion.div>

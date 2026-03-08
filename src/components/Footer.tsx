@@ -30,9 +30,9 @@ const Footer = () => {
         
         <div className="border-t border-slate-900 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
           <p>&copy; {new Date().getFullYear()} DevPortfolio. All rights reserved.</p>
-          <p className="flex items-center gap-1 mt-2 md:mt-0">
-            Made with <Heart size={14} className="text-red-500 fill-red-500" /> using React & Tailwind
-          </p>
+          <p className="flex items-center gap-1 mt-2 md:mt-0 text-slate-400 text-sm">
+  Crafted with <Heart size={14} className="text-red-500 fill-red-500" /> care and creativity
+</p>
         </div>
       </div>
     </footer>

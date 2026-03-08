@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -16,20 +17,31 @@ const Contact = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', message: '' });
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => setIsSubmitted(false), 5000);
-    }, 1500);
+
+    emailjs.sendForm(
+      "service_mmm0wp7",   
+      "template_196uwhk",     
+      e.currentTarget,     
+      "YKYEBTE73ALi9BmFV"    
+    ).then(
+      (result) => {
+        console.log(result.text);
+        setIsSubmitting(false);
+        setIsSubmitted(true);
+        setFormData({ name: '', email: '', message: '' });
+
+        
+        setTimeout(() => setIsSubmitted(false), 5000);
+      },
+      (error) => {
+        console.log(error.text);
+        setIsSubmitting(false);
+        alert("Something went wrong. Try again.");
+      }
+    );
   };
 
   return (
@@ -50,6 +62,7 @@ const Contact = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -94,13 +107,14 @@ const Contact = () => {
                 <div>
                   <h4 className="text-white font-medium">Location</h4>
                   <p className="text-slate-400">
-                    Bouskoura,Casablanca
+                    Bouskoura, Casablanca
                   </p>
                 </div>
               </div>
             </div>
           </motion.div>
 
+          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
